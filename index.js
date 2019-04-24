@@ -10,6 +10,7 @@ const path = require("path");
 const Raven = require("raven");
 const Logger = require("le_node");
 const winston = require("winston");
+const helmet = require("helmet");
 
 // Load App Variables
 nconf.argv().env();
@@ -93,6 +94,9 @@ app.use(
   })
 );
 
+// Integrate Helmet to secure server
+app.use(helmet());
+
 // Add Response Time
 app.use(responseTime());
 
@@ -136,7 +140,6 @@ app.all("/api/*", (req, res) => {
 });
 
 // EXPRESS : Start Server
-app.disable("x-powered-by");
 app.listen(nconf.get("PORT") || 80);
 
 global.logger.info(`[API] -> Listening on Port : ${nconf.get("PORT") || 80}`);
