@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "npx eslint ."
   },
   "repository": {
     "type": "git",
@@ -29,7 +29,14 @@
     "prettier": "^1.17.0"
   },
   "dependencies": {
+    "body-parser": "^1.18.3",
     "express": "^4.16.4",
-    "nconf": "^0.10.0"
+    "le_node": "^1.8.0",
+    "mongoose": "^5.5.3",
+    "nconf": "^0.10.0",
+    "passport": "^0.4.0",
+    "raven": "^2.6.4",
+    "response-time": "^2.3.2",
+    "winston": "^3.2.1"
   }
 }
