@@ -91,7 +91,11 @@ module.exports = (app, Models) => {
           Todo.findOneAndUpdate({ id: req.params.id }, data, { new: true }, (err, todo) => {
             if (err) {
               res.status(500).json({
-                error: "Impossible to found/save Todo. Please Try Again."
+                error: "Impossible to save Todo. Please Try Again."
+              });
+            } else if (!todo) {
+              res.status(404).json({
+                error: "Impossible to found Todo. Please Try Again."
               });
             } else {
               const todoRes = todo._doc;
@@ -119,12 +123,12 @@ module.exports = (app, Models) => {
         id: Joi.string().min(5)
       },
       res,
-      () => {
+      data => {
         if (req.params.id) {
-          Todo.findOneAndRemove({ id: req.params.id }, err => {
+          Todo.findOneAndRemove({ id: data.id }, err => {
             if (err) {
               res.status(500).json({
-                error: "Impossible to found Todo. Please Try Again."
+                error: "Impossible to delete Todo. Please Try Again."
               });
             } else {
               res.status(200).json({
