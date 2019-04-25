@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "lint": "npx eslint ."
+    "lint": "npx eslint .",
+    "docs": "node docs.js"
   },
   "repository": {
     "type": "git",
@@ -29,6 +30,7 @@
     "prettier": "^1.17.0"
   },
   "dependencies": {
+    "@hapi/joi": "^15.0.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "helmet": "^3.16.0",
