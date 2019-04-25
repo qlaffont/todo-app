@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "npx eslint .",
     "docs": "node docs.js",
-    "test": "npx mocha tests.js --exit"
+    "test": "npx mocha test/tests.js --exit"
   },
   "repository": {
     "type": "git",
