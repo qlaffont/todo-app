@@ -73,6 +73,62 @@ module.exports = (chai, app) => {
             done();
           });
       });
+
+      it("shoud return object", done => {
+        chai
+          .request(app)
+          .get("/todos/topmol")
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(200);
+            expect(res.body).to.have.property("id");
+            expect(res.body).to.have.property("title");
+            expect(res.body).to.have.property("creationDate");
+            done();
+          });
+      });
+    });
+
+    describe("Todo - Edit", () => {
+      it("shoud return 404 if id not found", done => {
+        chai
+          .request(app)
+          .post("/todos/toto")
+          .send({
+            title: "My New Title for my Todo Page"
+          })
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(404);
+            done();
+          });
+      });
+
+      it("Edit will be good", done => {
+        chai
+          .request(app)
+          .post("/todos/topmol")
+          .send({
+            title: "My New Title for my Todo Page"
+          })
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(200);
+            expect(res.body).to.have.property("todo");
+            expect(res.body.todo).to.be.an("object");
+            done();
+          });
+      });
+    });
+
+    describe("Todo - Delete", () => {
+      it("Todo will be deleted", done => {
+        chai
+          .request(app)
+          .delete("/todos/topmol")
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(200);
+            expect(res.body).to.have.property("message");
+            done();
+          });
+      });
     });
   });
 };
