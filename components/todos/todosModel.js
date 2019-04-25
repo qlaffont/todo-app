@@ -25,7 +25,8 @@ module.exports = mongoose => {
     {
       id: {
         type: String,
-        default: () => todosTools.generateId()
+        default: () => todosTools.generateId(),
+        unique: true
       },
       creationDate: {
         type: Date,
