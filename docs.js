@@ -28,13 +28,13 @@ const options = {
 // initialize swagger-jsdoc
 const swaggerSpec = swaggerJSDoc(options);
 
-app.get("*", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-
 // serve swagger
 app.get("/swagger.json", (_req, res) => {
   res.setHeader("Content-Type", "application/json");
   res.send(swaggerSpec);
 });
+
+app.get("*", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.disable("x-powered-by");
 console.log("Swagger Doc Open at 127.0.0.1:9000");
