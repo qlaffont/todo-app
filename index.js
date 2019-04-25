@@ -65,6 +65,7 @@ mongoose.Promise = global.Promise;
 const Models = require(join(process.cwd(), "config", "modelLoader"))(mongoose);
 
 mongoose.connect(nconf.get("MONGODB_URI"), { useNewUrlParser: true });
+mongoose.set("useFindAndModify", false);
 
 // ---------------------------------------------------------------------------
 
