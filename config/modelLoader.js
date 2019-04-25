@@ -16,7 +16,7 @@ module.exports = function loadFiles() {
   getDirectories("./components").forEach(componentSubFolder => {
     readdirSync(componentSubFolder).forEach(file => {
       if (file.endsWith("Model.js")) {
-        global.logger.info(`[Model] -> Load Model from ${file}`);
+        if (global.logger) global.logger.info(`[Model] -> Load Model from ${file}`);
         let modelName = file.slice(0, -8);
         modelName = modelName.charAt(0).toUpperCase() + modelName.slice(1, -1);
 
