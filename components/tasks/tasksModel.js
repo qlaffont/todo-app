@@ -8,6 +8,7 @@ module.exports = mongoose => {
    *     type: object
    *     required:
    *      - id_Todo
+   *      - title
    *     properties:
    *       _id:
    *         type: string
@@ -15,6 +16,8 @@ module.exports = mongoose => {
    *       creationDate:
    *         type: date
    *         default: new Date().toISOString()
+   *       title:
+   *         type: string
    *       message:
    *         type: string
    *       completed:
@@ -33,6 +36,10 @@ module.exports = mongoose => {
       creationDate: {
         type: Date,
         default: () => new Date().toISOString()
+      },
+      title: {
+        type: String,
+        require: true
       },
       message: {
         type: String
