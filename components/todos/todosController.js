@@ -9,7 +9,6 @@ module.exports = (app, Models) => {
   todosController.getTodo = (req, res) => {
     if (req.params.id) {
       Todo.findOne({ id: req.params.id })
-        .select("-_id")
         .lean()
         .exec((err, data) => {
           if (data) {

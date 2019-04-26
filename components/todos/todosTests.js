@@ -4,6 +4,8 @@ module.exports = (chai, app) => {
   const { expect } = chai;
 
   describe("Todos Tests", () => {
+    let todoId;
+
     describe("Todo - Add", () => {
       it("Wrong Data - Should be 400", done => {
         chai
@@ -43,6 +45,7 @@ module.exports = (chai, app) => {
             expect(res.body).to.have.property("id");
             expect(res.body).to.have.property("message");
             expect(res.body.id).equal("topmol");
+            todoId = res.body.id;
             done();
           });
       });
@@ -77,7 +80,7 @@ module.exports = (chai, app) => {
       it("shoud return object", done => {
         chai
           .request(app)
-          .get("/todos/topmol")
+          .get(`/todos/${todoId}`)
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
             expect(res.body).to.have.property("id");
@@ -105,7 +108,7 @@ module.exports = (chai, app) => {
       it("Edit will be good", done => {
         chai
           .request(app)
-          .post("/todos/topmol")
+          .post(`/todos/${todoId}`)
           .send({
             title: "My New Title for my Todo Page"
           })
@@ -122,7 +125,7 @@ module.exports = (chai, app) => {
       it("Todo will be deleted", done => {
         chai
           .request(app)
-          .delete("/todos/topmol")
+          .delete(`/todos/${todoId}`)
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
             expect(res.body).to.have.property("message");
