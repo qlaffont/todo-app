@@ -17,7 +17,7 @@ module.exports = mongoose => {
    *         default: new Date().toISOString()
    *       message:
    *         type: string
-   *       completesd:
+   *       completed:
    *         type: boolean
    *         default: false
    *       priority:
