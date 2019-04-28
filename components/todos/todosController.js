@@ -4,7 +4,7 @@ const todoTools = require("./todosTools");
 
 module.exports = (app, Models) => {
   const todosController = {};
-  const { Todo } = Models;
+  const { Todo, Task } = Models;
 
   todosController.getTodo = (req, res) => {
     if (req.params.id) {
@@ -124,14 +124,33 @@ module.exports = (app, Models) => {
       res,
       data => {
         if (req.params.id) {
-          Todo.findOneAndRemove({ id: data.id }, err => {
+          Todo.findOneAndRemove({ id: data.id }, (err, oldtodo) => {
             if (err) {
               res.status(500).json({
                 error: "Impossible to delete Todo. Please Try Again."
               });
             } else {
-              res.status(200).json({
-                message: "Todo deleted with success"
+              Task.find({ id_Todo: oldtodo._id }, (_err, tasks) => {
+                const promiseDelete = id => {
+                  return new Promise(resolve => {
+                    Todo.findOneAndRemove({ _id: id }, () => {
+                      resolve();
+                    });
+                  });
+                };
+
+                const arrayPromise = [];
+
+                for (let index = 0; index < tasks.length; index += 1) {
+                  const task = tasks[index];
+                  arrayPromise.push(promiseDelete(task._id));
+                }
+
+                Promise.all(arrayPromise).then(() => {
+                  res.status(200).json({
+                    message: "Todo deleted with success"
+                  });
+                });
               });
             }
           });
