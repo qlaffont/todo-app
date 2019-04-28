@@ -8,6 +8,7 @@ module.exports = (app, Models) => {
   tasksController.getTasks = (req, res) => {
     if (req.params.id_Todo) {
       Task.find({ id_Todo: req.params.id_Todo })
+        .sort({ priority: -1, completed: 1 })
         .lean()
         .exec((err, data) => {
           if (!err && data.length > 0) {
