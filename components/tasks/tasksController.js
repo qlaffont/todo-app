@@ -126,7 +126,7 @@ module.exports = (app, Models) => {
       res,
       data => {
         if (req.params.id) {
-          Task.findOneAndRemove({ id: data.id }, err => {
+          Task.findOneAndRemove({ _id: data.id }, err => {
             if (err) {
               res.status(500).json({
                 error: "Impossible to delete Task. Please Try Again."
