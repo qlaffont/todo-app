@@ -1,5 +1,5 @@
 # docker-compose.yml
-version: "2"
+version: "3.5"
 
 services:
   node:
@@ -17,6 +17,9 @@ services:
     restart: on-failure
     depends_on:
       - mongo
+    networks:
+      - kata-network
+      - kata-api-network
   mongo:
     container_name: mongo
     image: mongo:4.2
@@ -30,3 +33,9 @@ services:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: root
       MONGO_INITDB_DATABASE: todoapp
+    networks:
+      - kata-api-network
+networks:
+  kata-network:
+    name: kata-network
+  kata-api-network:
