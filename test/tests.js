@@ -12,14 +12,14 @@ const { lstatSync, readdirSync } = require("fs");
 const mongoose = require("mongoose");
 
 // Set Up Tests Env Var
-process.env.MONGODB_URI = process.env.MONGODB_URI || "mongodb://127.0.0.1/todoapp-test";
+process.env.MONGODB_URI = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/todoapp";
 
 // Clean DB Before Start
 describe("Start Test", () => {
   before(done => {
     mongoose.connect(
       process.env.MONGODB_URI,
-      { useNewUrlParser: true, useCreateIndex: true },
+      { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true },
       () => {
         mongoose.connection.db.dropDatabase(() => {
           done();

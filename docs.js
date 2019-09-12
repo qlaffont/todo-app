@@ -37,5 +37,5 @@ app.get("/swagger.json", (_req, res) => {
 app.get("*", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.disable("x-powered-by");
-console.log("Swagger Doc Open at 127.0.0.1:9000");
+console.log("Swagger Doc Open at 127.0.0.1:9000"); // eslint-disable-line no-console
 app.listen(9000, "localhost");

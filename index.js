@@ -64,7 +64,11 @@ mongoose.Promise = global.Promise;
 // Load Models with Config Loader
 const Models = require(join(process.cwd(), "config", "modelLoader"))(mongoose);
 
-mongoose.connect(nconf.get("MONGODB_URI"), { useNewUrlParser: true, useCreateIndex: true });
+mongoose.connect(nconf.get("MONGODB_URI"), {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useUnifiedTopology: true
+});
 mongoose.set("useFindAndModify", false);
 
 // ---------------------------------------------------------------------------
@@ -141,9 +145,9 @@ app.all("/api/*", (req, res) => {
 });
 
 // EXPRESS : Start Server
-app.listen(nconf.get("PORT") || 80);
+app.listen(nconf.get("PORT") || 3000);
 
-global.logger.info(`[API] -> Listening on Port : ${nconf.get("PORT") || 80}`);
+global.logger.info(`[API] -> Listening on Port : ${nconf.get("PORT") || 3000}`);
 
 // ---------------------------------------------------------------------------
 
