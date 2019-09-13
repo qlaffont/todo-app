@@ -8,7 +8,7 @@ const responseTime = require("response-time");
 const mongoose = require("mongoose");
 const path = require("path");
 const Raven = require("raven");
-const Logger = require("le_node");
+const Logger = require("r7insight_node");
 const winston = require("winston");
 const helmet = require("helmet");
 
@@ -22,7 +22,7 @@ nconf.required(["MONGODB_URI"]);
 const level = nconf.get("LOG") || "silly";
 
 if (nconf.get("LE_KEY")) {
-  global.logger = new Logger({ token: nconf.get("LE_KEY") });
+  global.logger = new Logger({ token: nconf.get("LE_KEY"), region: nconf.get("LE_REGION") });
 } else {
   global.logger = winston.createLogger({
     level,
