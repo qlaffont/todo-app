@@ -14,7 +14,6 @@ services:
     volumes:
       - ./:/home/node/app
     command: "npm run test"
-    restart: on-failure
     depends_on:
       - mongo
     networks:
@@ -24,7 +23,6 @@ services:
     container_name: mongo
     image: mongo:4.2
     command: mongod --auth
-    restart: always
     ports:
       - 27017:27017
     volumes:

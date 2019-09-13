@@ -20,4 +20,4 @@ before_install:
 
 script:
   - npm install
-  - docker-compose -f docker-compose.travis.yml up -d mongo
+  - docker-compose -f docker-compose.travis.yml up
