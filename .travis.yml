@@ -1,0 +1,24 @@
+sudo: required
+
+language: node
+
+node_js:
+  - "10.16.3"
+
+env:
+  DOCKER_COMPOSE_VERSION: 1.24.1
+
+services:
+  - docker
+
+before_install:
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+  - docker-compose -v
+  - docker -v
+
+script:
+  - npm install
+  - docker-compose -f docker-compose.travis.yml up -d mongo
+  - MONGODB_URI=mongodb://user:pwd@localhost:27017/todoapp npm run test
