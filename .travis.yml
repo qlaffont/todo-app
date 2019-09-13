@@ -20,5 +20,5 @@ before_install:
 
 script:
   - npm install
-  - docker-compose -f docker-compose.travis.yml up -d mongo
+  - docker-compose -f docker-compose.yml up -d mongo
   - MONGODB_URI=mongodb://user:pwd@localhost:27017/todoapp npm run test
